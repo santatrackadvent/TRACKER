@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Accueil - Suivre le Père Noël</title>
+  <style>
+    body {
+      font-family: "Lobster", cursive;
+      text-align: center;
+      background-color: #E0120C;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 16px;
+      color: #ffffff;
+    }
+
+    #countdown {
+      font-size: 24px;
+      margin-bottom: 24px;
+      color: #ffffff;
+    }
+
+    #follow-button {
+      font-size: 24px;
+      padding: 12px 24px;
+      background-color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bienvenue sur le site de suivi du Père Noël</h1>
+    <p>Le Père Noël arrivera bientôt !</p>
+    <div id="countdown"></div>
+    <button id="follow-button" onclick="redirectToSantaTracker()">Suivre le Père Noël</button>
+  </div>
+
+  <script>
+    function redirectToSantaTracker() {
+      window.location.href = "file:///C:/Users/hobin/Pictures/santa.html";
+    }
+
+    function startCountdown() {
+      var countdownElement = document.getElementById("countdown");
+      var followButton = document.getElementById("follow-button");
+
+      var countdownDate = new Date("December 24, 2024 11:00:00").getTime(); // Définit la date de fin du compte à rebours
+
+      var countdownInterval = setInterval(function() {
+        var now = new Date().getTime();
+        var distance = countdownDate - now;
+
+        if (distance < 0) {
+          clearInterval(countdownInterval);
+          countdownElement.style.display = "none";
+          followButton.style.display = "block";
+        } else {
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          countdownElement.innerHTML = "Temps restant : " + days + "j " + hours + "h " + minutes + "m " + seconds + "s";
+        }
+      }, 1000);
+    }
+
+    startCountdown();
+  </script>
+</body>
+</html>
